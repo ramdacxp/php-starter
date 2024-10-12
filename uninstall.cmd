@@ -1,8 +1,5 @@
 @echo off
 setlocal
 set ROOT=%~dp0
-set BIN=%ROOT%bin\
-
-rmdir /s /q %BIN%
-
+rmdir /s /q %ROOT%bin %ROOT%node_modules %ROOT%vendor
 endlocal
