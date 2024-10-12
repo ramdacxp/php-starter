@@ -1,0 +1,18 @@
+{
+  "name": "php-starter",
+  "version": "0.0.1",
+  "description": "PHP Starter Project",
+  "author": "Michael Hoser",
+  "license": "MIT",
+  "scripts": {
+    "install-composer": ".\\install-composer.cmd",
+    "install-php": ".\\install-php.cmd",
+    "install": "npm run install-php && npm run install-composer",
+    "start-php": ".\\bin\\php\\php.exe -S 127.0.0.1:8080 -t www",
+    "start": "concurrently -n php -c blue,green,magenta --kill-others \"npm:start-php\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "qiao-zip-cli": "^4.5.5"
+  }
+}
