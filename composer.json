@@ -1,8 +1,12 @@
 {
-    "require": {
-        "leafs/leaf": "^3.7",
-        "leafs/devtools": "^0.1.0",
-        "leafs/cli": "^2.13",
-        "fire015/flintstone": "^2.3"
-    }
+  "name": "mischa/php-starter",
+  "description": "PHP Starter Template",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "leafs/leaf": "^3.7",
+    "leafs/devtools": "^0.1.0",
+    "leafs/cli": "^2.13",
+    "fire015/flintstone": "^2.3"
+  }
 }
