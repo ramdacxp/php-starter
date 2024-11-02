@@ -1,3 +1,10 @@
 {
-  "php.validate.executablePath": "bin/php/php.exe"
+  "php.validate.executablePath": "bin/php/php.exe",
+  "cSpell.customDictionaries": {
+    "project-words": {
+      "name": "PHP Starter Dictionary",
+      "path": "${workspaceRoot}/.vscode/spellchecker.txt",
+      "description": "Custom words used in this project"
+    },
+  }
 }
