@@ -1,11 +1,14 @@
-### TEST REQUESTS
+################################################################################
+### TEST REQUESTS to be executed via REST Client extension in VS Code
+################################################################################
 
+### All requests below use this endpoint.
+### Change it to test against a real API server.
 @server = http://127.0.0.1:8080
 
 
 ### List information about current configuration
 GET {{server}}/config
-
 
 ### Set new user configuration (if not already set)
 POST {{server}}/config
@@ -16,4 +19,23 @@ Content-Type: application/json
   "user": "root",
   "password": "",
   "dbname": "api"
+}
+
+### Register a new user
+POST {{server}}/auth/register
+Content-Type: application/json
+
+{
+  "login": "max",
+  "password": "myPassword",
+  "name": "Max Mustermann"
+}
+
+### Register a new user without a name
+POST {{server}}/auth/register
+Content-Type: application/json
+
+{
+  "login": "max2",
+  "password": "myPassword"
 }

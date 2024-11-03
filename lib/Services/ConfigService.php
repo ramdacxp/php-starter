@@ -58,13 +58,14 @@ class ConfigService
   public function initDatabaseTables($db): void
   {
     $db->createTableIfNotExists(
-      "user",
+      "users",
       [
         "id" => "int(11) NOT NULL AUTO_INCREMENT",
         "name" => "varchar(255) DEFAULT NULL",
         "login" => "varchar(255) NOT NULL",
-        "salt" => "varchar(36) NOT NULL DEFAULT (UUID())",
+        // "salt" => "varchar(36) NOT NULL DEFAULT (UUID())",
         "password" => "varchar(255) DEFAULT NULL",
+        "created" => "timestamp NOT NULL DEFAULT current_timestamp()",
         "PRIMARY KEY" => "(id)",
       ]
     )->execute();
