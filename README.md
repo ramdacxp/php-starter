@@ -43,7 +43,7 @@ _/Mischa_
 npm install
 
 > php-starter@0.2.0 installer fast
-> node .\node-scripts\installer.js fast
+> node .\scripts\installer.js fast
 
   ____  _  _  ___  ____    __    __    __    ____  ____ 
  (_  _)( \( )/ __)(_  _)  /__\  (  )  (  )  ( ___)(  _ \

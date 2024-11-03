@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "install": "npm run installer fast && npm run compose",
-    "installer": "node .\\node-scripts\\installer.js",
-    "uninstaller": "node .\\node-scripts\\uninstaller.js",
+    "installer": "node .\\scripts\\installer.js",
+    "uninstaller": "node .\\scripts\\uninstaller.js",
     "compose": ".\\bin\\composer.cmd install",
     "serve": ".\\bin\\php\\php.exe -S 127.0.0.1:8080 -t www",
     "admin": ".\\bin\\php\\php.exe -S 127.0.0.1:8181 -t bin\\phpMyAdmin",
