@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Leaf\App;
+use Leaf\Db;
 
 class ConfigService
 {
@@ -19,7 +20,7 @@ class ConfigService
     return file_exists($this->getConfigFilePath(self::CONFIG_FILE_USER));
   }
 
-  public function setAppConfig(App $app): bool
+  public function getConfig(): ?array
   {
     $userConfigFile = $this->getConfigFilePath(self::CONFIG_FILE_USER);
     if (file_exists($userConfigFile)) {
@@ -32,11 +33,10 @@ class ConfigService
     }
 
     if (is_array($config)) {
-      $app->config("db", $config);
-      return true;
+      return $config;
     }
 
-    return false;
+    return null;
   }
 
   public function saveUserConfig(array $config): bool
@@ -55,7 +55,7 @@ class ConfigService
     return file_put_contents($userConfigFile, $content) !== false;
   }
 
-  public function initDatabaseTables($db): void
+  public function initDatabaseTables(Db $db): void
   {
     $db->createTableIfNotExists(
       "users",

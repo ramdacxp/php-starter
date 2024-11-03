@@ -9,11 +9,14 @@ $app = new Leaf\App;
 
 // app configuration
 $config = new App\Services\ConfigService;
-$config->setAppConfig($app);
+// $app->config("db", $config->getConfig());
 
 // database
-$db = new Leaf\Db($app->config("db"));
+$db = new Leaf\Db($config->getConfig());
+// $db->connect($app->config("db"));
 $config->initDatabaseTables($db);
+
+// DB config is auto pushed to app config with key "db.config"
 
 // auth
 $auth = new App\Services\AuthService($db);

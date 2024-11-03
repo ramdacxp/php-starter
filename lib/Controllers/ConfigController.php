@@ -23,8 +23,8 @@ class ConfigController
       "status" => "ok",
       "php" => phpversion(),
       "configured" => $this->config->hasUserConfig(),
-      "db.host" => $this->app->config("db")["host"],
-      "db.dbname" => $this->app->config("db")["dbname"],
+      "db.host" => $this->app->config("db.config")["host"],
+      "db.dbname" => $this->app->config("db.config")["dbname"],
     ]);
   }
 
