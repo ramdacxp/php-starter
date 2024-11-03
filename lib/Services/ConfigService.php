@@ -39,7 +39,7 @@ class ConfigService
     return false;
   }
 
-  public function setUserConfig(array $config): bool
+  public function saveUserConfig(array $config): bool
   {
     $userConfigFile = $this->getConfigFilePath(self::CONFIG_FILE_USER);
     if (file_exists($userConfigFile)) {
@@ -53,5 +53,20 @@ class ConfigService
     }
 
     return file_put_contents($userConfigFile, $content) !== false;
+  }
+
+  public function initDatabaseTables($db): void
+  {
+    $db->createTableIfNotExists(
+      "user",
+      [
+        "id" => "int(11) NOT NULL AUTO_INCREMENT",
+        "name" => "varchar(255) DEFAULT NULL",
+        "login" => "varchar(255) NOT NULL",
+        "salt" => "varchar(36) NOT NULL DEFAULT (UUID())",
+        "password" => "varchar(255) DEFAULT NULL",
+        "PRIMARY KEY" => "(id)",
+      ]
+    )->execute();
   }
 }

@@ -2,17 +2,27 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 
+// -----------------------------------------------------------------------------
+// INIT
+// -----------------------------------------------------------------------------
 $app = new Leaf\App;
 
+// app configuration
 $config = new App\Services\ConfigService;
 $config->setAppConfig($app);
 
-$db = new Leaf\Db($app->config("database"));
+// database
+$db = new Leaf\Db($app->config("db"));
+$config->initDatabaseTables($db);
 
-// Required by DevTools:
-// set current working to parent as "vendor" is not a sub-folder of the app
-chdir(__DIR__ . "/..");
+// devtools
+// important: set cwd to parent as "vendor" is not a sub-folder of the app
+chdir(__DIR__ . DIRECTORY_SEPARATOR . "..");
 \Leaf\DevTools::install("/devtools");
+
+// -----------------------------------------------------------------------------
+// ROUTES
+// -----------------------------------------------------------------------------
 
 // example routes
 $app->get("/", function () use ($app) {
@@ -28,5 +38,7 @@ $configController = new App\Controllers\ConfigController($app, $config);
 $app->get("/config", [$configController, "getInfo"]);
 $app->post("/config", [$configController, "postConfig"]);
 
-// done -> run the app
+// -----------------------------------------------------------------------------
+// RUN THE APP
+// -----------------------------------------------------------------------------
 $app->run();

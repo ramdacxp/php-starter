@@ -15,5 +15,5 @@ Content-Type: application/json
   "host": "localhost",
   "user": "root",
   "password": "",
-  "database": "api"
+  "dbname": "api"
 }

@@ -84,30 +84,6 @@ Installation of PHP was successful.
 | `npm run db`                    | Start the Maria DB                                              |
 | `npm run admin`                 | Start the webserver for the database dashboard phpMyAdmin       |
 
-## Usage
-
-Use `npm start` to spin up the database and development web servers.
-
-Open the main website at <http://localhost:8080>, which shows a simple WebAPI response:
-
-```json
-{
-  "message": "Hello World!"
-}
-```
-
-A dynamic greeting is returned on <http://localhost:8080/hello/mischa>:
-
-```json
-{
-  "message": "Hello Mischa!"
-}
-```
-
-The [Leaf DevTools](https://leafphp.dev/modules/devtools/) are available at <http://localhost:8080/devtools>.
-
-The PhpMyAdmin MariaDB Dashboard is available at <http://localhost:8181>.
-
 ## Command Shell
 
 Prepare each instance of a `CMD` shell with the script `tools.cmd` like this:
@@ -143,6 +119,64 @@ Composer version 2.8.1 2024-10-04 11:31:01
 | |__/ -_) _` |  _| | (__| |__ | |
 |____\___\__,_|_|    \___|____|___|
 ```
+
+## Usage
+
+Use `npm start` to spin up the database and development web servers.
+
+Open the main website at <http://localhost:8080>, which shows a simple WebAPI response:
+
+```json
+{
+  "message": "Hello World!"
+}
+```
+
+A dynamic greeting is returned on <http://localhost:8080/hello/mischa>:
+
+```json
+{
+  "message": "Hello Mischa!"
+}
+```
+
+The file `requests.http` contains sample REST API requests to send against the webAPI via the [VSCode Rest Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+
+The [Leaf DevTools](https://leafphp.dev/modules/devtools/) are available at <http://localhost:8080/devtools>.
+
+The PhpMyAdmin MariaDB Dashboard is available at <http://localhost:8181>.
+
+## Configuration
+
+Configuration status information is available via `GET /config`:
+
+```json
+{
+    "status": "ok",
+    "php": "8.3.11",
+    "configured": false,
+    "db.host": "localhost",
+    "db.dbname": "api"
+}
+```
+
+If not configured (`"configured": false`), a default database connection is used, which matches the MariaDB development server.
+
+The default configuration can be found in `config\config.default.php`.
+Copy the file over to `config\config.php` and adapt required entries.
+
+If not already existing, this file can be created via the webAPI. Send the following object to `POST /config`:
+
+```json
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "",
+  "dbname": "api"
+}
+```
+
+For security reasons this method returns an errors once a user config is available.
 
 ## License
 

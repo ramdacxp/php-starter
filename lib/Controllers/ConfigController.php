@@ -24,22 +24,22 @@ class ConfigController
       "php" => phpversion(),
       "configured" => $this->config->hasUserConfig(),
       "db.host" => $this->app->config("db")["host"],
-      "db.database" => $this->app->config("db")["database"],
+      "db.dbname" => $this->app->config("db")["dbname"],
     ]);
   }
 
   // POST /config
   public function postConfig()
   {
-    $data = $this->app->request()->get(["host", "user", "password", "database"]);
+    $data = $this->app->request()->get(["host", "user", "password", "dbname"]);
     if (is_array($data) === false) {
       $this->app->response()->json([
-        "error" => "Invalid data"
+        "error" => "Error: Invalid configuration data. Expected an object with host, user, password, dbname."
       ], 400);
       return;
     }
 
-    if ($this->config->setUserConfig($data) === false) {
+    if ($this->config->saveUserConfig($data) === false) {
       $this->app->response()->json([
         "error" => "Error: Changing an existing configuration is not allowed. Delete the existing configuration file and try again."
       ], 403);

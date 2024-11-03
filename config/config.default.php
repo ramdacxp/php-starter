@@ -2,4 +2,4 @@
 $config["host"]="localhost";
 $config["user"]="root";
 $config["password"]="";
-$config["database"]="api";
+$config["dbname"]="api";
