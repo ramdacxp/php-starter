@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43938932f20f3275db357cc4443e84b9",
+    "content-hash": "eeba65a5eb758ee24865ccb5e05f6b38",
     "packages": [
         {
             "name": "fire015/flintstone",
@@ -183,6 +183,71 @@
                 }
             ],
             "time": "2024-09-13T04:56:41+00:00"
+        },
+        {
+            "name": "leafs/db",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafsphp/db.git",
+                "reference": "440f0c1a7792c11c1621b82a378c3342677b15fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafsphp/db/zipball/440f0c1a7792c11c1621b82a378c3342677b15fd",
+                "reference": "440f0c1a7792c11c1621b82a378c3342677b15fd",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14",
+                "leafs/alchemy": "^1.0",
+                "pestphp/pest": "^1.21"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Leaf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Darko",
+                    "email": "mickdd22@gmail.com",
+                    "homepage": "https://mychi.netlify.app",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leaf PHP db module.",
+            "homepage": "https://leafphp.dev/modules/db/",
+            "keywords": [
+                "database",
+                "framework",
+                "leaf",
+                "orm",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/leafsphp/db/issues",
+                "source": "https://github.com/leafsphp/db/tree/v2.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/leafsphp",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/leaf",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2024-09-30T21:13:15+00:00"
         },
         {
             "name": "leafs/devtools",

@@ -1,0 +1,19 @@
+### TEST REQUESTS
+
+@server = http://127.0.0.1:8080
+
+
+### List information about current configuration
+GET {{server}}/config
+
+
+### Set new user configuration (if not already set)
+POST {{server}}/config
+Content-Type: application/json
+
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "",
+  "database": "api"
+}
