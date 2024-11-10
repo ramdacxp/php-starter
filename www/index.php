@@ -9,7 +9,7 @@ $app = new Leaf\App;
 
 // app configuration
 $config = new App\Services\ConfigService;
-$config->setAppConfig($app);
+$app->config("db", $config->getConfig());
 
 // try to create database, if it does not exist
 // needs to be executed BEFORE creating the Leaf\Db instance
@@ -22,10 +22,12 @@ $config->initDatabaseTables($db);
 // auth
 $auth = new App\Services\AuthService($db);
 
-// devtools
-// important: set cwd to parent as "vendor" is not a sub-folder of the app
-chdir(__DIR__ . DIRECTORY_SEPARATOR . "..");
-\Leaf\DevTools::install("/devtools");
+// devtools (only if running in PHP dev server!)
+if (strpos($_SERVER["SERVER_SOFTWARE"], "Development Server") !== false) {
+  // important: set cwd to parent as "vendor" is not a sub-folder of the app
+  chdir(__DIR__ . DIRECTORY_SEPARATOR . "..");
+  \Leaf\DevTools::install("/devtools");
+}
 
 // -----------------------------------------------------------------------------
 // ROUTES
