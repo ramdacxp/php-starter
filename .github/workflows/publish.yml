@@ -2,8 +2,8 @@ name: 🚀 Deploy PHP-Starter
 
 on:
   # trigger if pushed to main
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
 
   # manual trigger
   workflow_dispatch:
@@ -21,6 +21,12 @@ jobs:
       uses: php-actions/composer@v6
       # with:
       #   command: install
+
+    - name: List App
+      run: ls -R lib www config
+
+    - name: List Vendor
+      run: ls vendor
 
     # https://github.com/marketplace/actions/sftp-upload
     - name: SFTP Upload
