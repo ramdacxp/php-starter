@@ -58,7 +58,7 @@ class ConfigService
   {
     // special db setup without any database name
     // as connect() would already fail if the database does not exist
-    $pdo = new \PDO("mysql:host=" . $config["host"], $config["user"], $config["password"]);
+    $pdo = new \PDO("mysql:host=" . $config["host"], $config["username"], $config["password"]);
     $db = new Db();
     $db->connection($pdo);
     $db->query("CREATE DATABASE IF NOT EXISTS " . $config["dbname"])->execute();

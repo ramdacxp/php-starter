@@ -1,5 +1,5 @@
 <?php
 $config["host"]="localhost";
-$config["user"]="root";
+$config["username"]="root";
 $config["password"]="";
 $config["dbname"]="api";
