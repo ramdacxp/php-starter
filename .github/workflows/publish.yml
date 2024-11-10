@@ -1,0 +1,37 @@
+name: 🚀 Deploy PHP-Starter
+
+on:
+  # trigger if pushed to main
+  push:
+    branches: [ "main" ]
+
+  # manual trigger
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name: Compose & Upload
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v3
+
+    # https://github.com/php-actions/composer
+    - name: Composer Install
+      uses: php-actions/composer@v6
+      # with:
+      #   command: install
+
+    # https://github.com/marketplace/actions/sftp-upload
+    - name: SFTP Upload
+      uses: Dylan700/sftp-upload-action@latest
+      with:
+        server: ${{ vars.FTP_SERVER }}
+        username: ${{ vars.FTP_USER }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        uploads: |
+          ./config/ => ./www/php-starter/config/
+          ./lib/ => ./www/php-starter/lib/
+          ./vendor/ => ./www/php-starter/vendor/
+          ./www/ => ./www/php-starter/www/
+        # delete: 'true'

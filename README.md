@@ -144,6 +144,17 @@ The [Leaf DevTools](https://leafphp.dev/modules/devtools/) are available at <htt
 
 The PhpMyAdmin MariaDB Dashboard is available at <http://localhost:8181>.
 
+## Production Deployment
+
+Upload the following sub-folders to your production webserver:
+
+* `config`
+* `lib`
+* `vendor`
+* `www` (only this folder should be available to the public, e.g. point your `api` sub-domain to this location)
+
+Configure your database in `config/config.php`.
+
 ## API Details
 
 The file `requests.http` contains sample REST API requests to send against the webAPI via the [VSCode Rest Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
