@@ -34,4 +34,13 @@ class AuthController
       ], 400);
     }
   }
+
+  // POST /auth/login
+  public function postLogin()
+  {
+    $login = $this->app->request()->get("login");
+    $password = $this->app->request()->get("password");
+
+    // $this->auth->login($login, $password);
+  }
 }

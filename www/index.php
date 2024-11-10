@@ -11,6 +11,10 @@ $app = new Leaf\App;
 $config = new App\Services\ConfigService;
 $config->setAppConfig($app);
 
+// try to create database, if it does not exist
+// needs to be executed BEFORE creating the Leaf\Db instance
+$config->initDatabase($app->config("db"));
+
 // database
 $db = new Leaf\Db($app->config("db"));
 $config->initDatabaseTables($db);

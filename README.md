@@ -140,13 +140,15 @@ A dynamic greeting is returned on <http://localhost:8080/hello/mischa>:
 }
 ```
 
-The file `requests.http` contains sample REST API requests to send against the webAPI via the [VSCode Rest Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
-
 The [Leaf DevTools](https://leafphp.dev/modules/devtools/) are available at <http://localhost:8080/devtools>.
 
 The PhpMyAdmin MariaDB Dashboard is available at <http://localhost:8181>.
 
-## Configuration
+## API Details
+
+The file `requests.http` contains sample REST API requests to send against the webAPI via the [VSCode Rest Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+
+### Configuration
 
 Configuration status information is available via `GET /config`:
 
@@ -177,6 +179,17 @@ If not already existing, this file can be created via the webAPI. Send the follo
 ```
 
 For security reasons this method returns an errors once a user config is available.
+
+### Auth Support
+
+_**Important:** This implementation is work in progress._
+
+As mostly required, this starter will also contain authentication support based on user accounts. Later on those users can be authorized to use selected APIs.
+
+* The `users` table contains all user accounts with `name` and a salted hash of the `password`. The **register** API allows to create new accounts.
+* During **login** the credentials are checked and a new entry in the `sessions` table is created, containing a session `token` which is returned.
+* **Access** to restricted APIs requires this token to be passed as request header `X-Auth`, e.g. as Bearer-Token.
+* The **logout** API removed the entry in the `sessions` table.
 
 ## License
 

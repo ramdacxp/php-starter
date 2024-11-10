@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Leaf\App;
+use Leaf\Db;
 
 class ConfigService
 {
@@ -53,6 +54,16 @@ class ConfigService
     }
 
     return file_put_contents($userConfigFile, $content) !== false;
+  }
+
+  public function initDatabase(array $config): void
+  {
+    // special db setup without any database name
+    // as connect() would already fail if the database does not exist
+    $pdo = new \PDO("mysql:host=" . $config["host"], $config["user"], $config["password"]);
+    $db = new Db();
+    $db->connection($pdo);
+    $db->query("CREATE DATABASE IF NOT EXISTS " . $config["dbname"])->execute();
   }
 
   public function initDatabaseTables($db): void
