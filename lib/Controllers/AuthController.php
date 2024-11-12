@@ -41,6 +41,16 @@ class AuthController
     $login = $this->app->request()->get("login");
     $password = $this->app->request()->get("password");
 
-    // $this->auth->login($login, $password);
+    $userId = $this->auth->checkLogin($login, $password);
+    if ($userId > 0) {
+      $this->app->response()->json([
+        "message" => "User '$login' logged in.",
+        "userId" => $userId
+      ]);
+    } else {
+      $this->app->response()->json([
+        "error" => "Invalid login or password."
+      ], 401);
+    }
   }
 }

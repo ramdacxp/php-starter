@@ -39,3 +39,21 @@ Content-Type: application/json
   "login": "max2",
   "password": "myPassword"
 }
+
+### Login
+POST {{server}}/auth/login
+Content-Type: application/json
+
+{
+  "login": "max2",
+  "password": "myPassword"
+}
+
+### Login (wrong password)
+POST {{server}}/auth/login
+Content-Type: application/json
+
+{
+  "login": "max2",
+  "password": "myWrongPassword"
+}

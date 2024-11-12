@@ -49,4 +49,16 @@ class AuthService
     if (strlen($value) < $minLength) return false;
     return true;
   }
+
+  public function checkLogin(string $login, string $password): int
+  {
+    if (!$this->isValid($login)) return -1;
+
+    $user = $this->db->select("users", "*")->where("login", $login)->first();
+    if (isset($user["id"])) {
+      if (password_verify($password, $user["password"])) return $user["id"];
+    }
+
+    return -1;
+  }
 }
