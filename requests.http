@@ -57,3 +57,6 @@ Content-Type: application/json
   "login": "max2",
   "password": "myWrongPassword"
 }
+
+### Logout (without token)
+POST {{server}}/auth/logout

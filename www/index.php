@@ -47,10 +47,12 @@ $configController = new App\Controllers\ConfigController($app, $config);
 $app->get("/config", [$configController, "getInfo"]);
 $app->post("/config", [$configController, "postConfig"]);
 
-// auth routes
+// auth routes (public)
 $authController = new App\Controllers\AuthController($app, $auth);
 $app->post("/auth/register", [$authController, "postRegister"]);
 $app->post("/auth/login", [$authController, "postLogin"]);
+
+// auth routes (logged in)
 $app->post("/auth/logout", [$authController, "postLogout"]);
 
 // -----------------------------------------------------------------------------

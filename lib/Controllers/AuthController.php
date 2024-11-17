@@ -54,4 +54,11 @@ class AuthController
       ], 401);
     }
   }
+
+  // POST /auth/logout
+  public function postLogout() {
+    $this->app->response()->json([
+      "error" => "Not available :("
+    ], 501);
+  }
 }
