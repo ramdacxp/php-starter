@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
+use Leaf\App;
 use Leaf\Db;
-
 
 class AuthService
 {
@@ -95,5 +95,17 @@ class AuthService
       ->execute();
 
     return $token;
+  }
+
+  public function registerMiddleware()
+  {
+    app()->registerMiddleware("auth", function () {
+      // $method = request()->getMethod();
+      // $url = request()->getUrl();
+      // echo "[Middleware: $method @ $url]\n";
+
+      app()->response()->json(["error" => "miep"], 401);
+      exit();
+    });
   }
 }
