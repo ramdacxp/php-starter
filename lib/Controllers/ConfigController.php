@@ -31,7 +31,7 @@ class ConfigController
   // POST /config
   public function postConfig()
   {
-    $data = $this->app->request()->get(["host", "user", "password", "dbname"]);
+    $data = $this->app->request()->get(["host", "username", "password", "dbname"]);
     if (is_array($data) === false) {
       $this->app->response()->json([
         "error" => "Error: Invalid configuration data. Expected an object with host, user, password, dbname."
