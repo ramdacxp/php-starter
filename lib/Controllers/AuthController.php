@@ -41,11 +41,12 @@ class AuthController
     $login = $this->app->request()->get("login");
     $password = $this->app->request()->get("password");
 
-    $userId = $this->auth->checkLogin($login, $password);
-    if ($userId > 0) {
+    if ($this->auth->checkCredentials($login, $password)) {
+      $userAgent = $this->app->request()->headers("User-Agent") ?? "Anonymous";
+      $token = $this->auth->createSession($login, $userAgent);
       $this->app->response()->json([
         "message" => "User '$login' logged in.",
-        "userId" => $userId
+        "token" => $token
       ]);
     } else {
       $this->app->response()->json([

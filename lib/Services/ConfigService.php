@@ -78,5 +78,20 @@ class ConfigService
         "PRIMARY KEY" => "(id)",
       ]
     )->execute();
+
+    $db->createTableIfNotExists(
+      "sessions",
+      [
+        "id" => "int(11) NOT NULL AUTO_INCREMENT",
+        "refUser" => "int(11) NOT NULL",
+        "token" => "varchar(255) NOT NULL",
+        "address" => "varchar(255) DEFAULT NULL",
+        "userAgent" => "varchar(255) DEFAULT NULL",
+        "created" => "timestamp NOT NULL DEFAULT current_timestamp()",
+        "lastUse" => "timestamp NOT NULL DEFAULT current_timestamp()",
+        "PRIMARY KEY" => "(id)",
+      ]
+    )->execute();
+
   }
 }

@@ -14,12 +14,6 @@ class AuthService
     $this->db = $db;
   }
 
-  public function existsUser(string $login): bool
-  {
-    $user = $this->db->select("users", "login")->where("login", $login)->first();
-    return isset($user["login"]);
-  }
-
   public function registerUser(string $login, string $password, ?string $name = null): ?string
   {
     if (!$this->isValid($login)) return "Invalid or missing value for 'login'.";
@@ -50,15 +44,56 @@ class AuthService
     return true;
   }
 
-  public function checkLogin(string $login, string $password): int
+  public function getUserProperty(string $login, string $column)
   {
-    if (!$this->isValid($login)) return -1;
+    $user = $this->db
+      ->select("users", $column)
+      ->where("login", $login)
+      ->first();
 
-    $user = $this->db->select("users", "*")->where("login", $login)->first();
-    if (isset($user["id"])) {
-      if (password_verify($password, $user["password"])) return $user["id"];
+    return isset($user[$column]) ? $user[$column] : null;
+  }
+
+  public function checkCredentials(string $login, string $password): bool
+  {
+    $hashedPassword = $this->getUserProperty($login, "password");
+    if ($hashedPassword != null) {
+      if (password_verify($password, $hashedPassword)) {
+        return true;
+      }
     }
 
-    return -1;
+    return false;
+  }
+
+  public function existsUser(string $login): bool
+  {
+    $userId = $this->getUserProperty($login, "id");
+    return $userId != null;
+  }
+
+  public function generateToken(): string
+  {
+    return bin2hex(openssl_random_pseudo_bytes(16));
+  }
+
+  public function createSession(string $login, string $userAgent): string|null
+  {
+    $userId = $this->getUserProperty($login, "id");
+    if ($userId == null) return null;
+
+    $token = $this->generateToken();
+
+    $this->db
+      ->insert("sessions")
+      ->params([
+        "refUser" => $userId,
+        "token" => $token,
+        "userAgent" => $userAgent,
+        // "created" => date("Y-m-d H:i:s")
+      ])
+      ->execute();
+
+    return $token;
   }
 }
