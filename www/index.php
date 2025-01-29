@@ -9,18 +9,26 @@ $app = new Leaf\App;
 
 // app configuration
 $config = new App\Services\ConfigService;
-$app->config("db", $config->getConfig());
+// $app->config("db", $config->getConfig());
+$dbConfig = $config->getConfig();
 
 // try to create database, if it does not exist
 // needs to be executed BEFORE creating the Leaf\Db instance
-$config->initDatabase($app->config("db"));
+$config->initDatabase($dbConfig);
 
 // database
-$db = new Leaf\Db($app->config("db"));
+$db = new Leaf\Db($dbConfig);
 $config->initDatabaseTables($db);
+
+// register the db instance as app()->database
+// $app->register("db", $db);
 
 // auth
 $auth = new App\Services\AuthService($db);
+$auth->registerMiddleware();
+$app->register("auth", function () use ($auth) {
+  return $auth;
+});
 
 // devtools (only if running in PHP dev server!)
 if (strpos($_SERVER["SERVER_SOFTWARE"], "Development Server") !== false) {
@@ -52,8 +60,18 @@ $authController = new App\Controllers\AuthController($app, $auth);
 $app->post("/auth/register", [$authController, "postRegister"]);
 $app->post("/auth/login", [$authController, "postLogin"]);
 
+
+$app->setNamespace("App\\Controllers");
+
 // auth routes (logged in)
-$app->post("/auth/logout", [$authController, "postLogout"]);
+$app->post(
+  "/auth/logout",
+  [
+    "middleware" => "auth",
+    // "namespace" => "App\\Controllers",
+    "ApiController@index"
+  ]
+);
 
 // -----------------------------------------------------------------------------
 // RUN THE APP

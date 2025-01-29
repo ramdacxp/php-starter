@@ -23,7 +23,7 @@ _Simply use it as a base and delete everything you don't need._
 
 Included PHP frameworks:
 
-* [Leaf](https://leafphp.dev/docs/introduction/) (Web API, MVC and beyond)
+* [Leaf](https://leafphp.dev/docs/) (Web API, MVC and beyond)
 * [Flintstone](https://github.com/fire015/flintstone) (file based key-value store)
 
 Have fun!  
