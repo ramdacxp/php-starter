@@ -122,6 +122,7 @@ extension=pdo_sqlite
 
 ; required by phpmyadmin
 extension=mysqli
+extension=mbstring
 
 ; required by composer
 extension=curl

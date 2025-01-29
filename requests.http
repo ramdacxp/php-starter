@@ -45,7 +45,7 @@ POST {{server}}/auth/login
 Content-Type: application/json
 
 {
-  "login": "max2",
+  "login": "max",
   "password": "myPassword"
 }
 
@@ -54,7 +54,7 @@ POST {{server}}/auth/login
 Content-Type: application/json
 
 {
-  "login": "max2",
+  "login": "max",
   "password": "myWrongPassword"
 }
 
